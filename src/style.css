@@ -4,10 +4,7 @@
     #FB{
        border-radius: 30px;
     }
-    body{
-        background-image: url(./img/portada.jpg);
-        background-repeat: no-repeat;
-    }
+    
     h1{
     position: absolute;
     width: 265.94px;
