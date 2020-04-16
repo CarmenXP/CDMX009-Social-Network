@@ -8,12 +8,8 @@
   <title>Document</title>
 </head>
 <body>
-  
-  <div id="root">
-
-  </div>
-
-  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+  <div class="root" id="root"></div>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase.js"></script>
  <script>
   var firebaseConfig = {
     apiKey: "AIzaSyANmPJ0eNQMwQak-rf6N5om4pg5rd7ikbU",
@@ -27,10 +23,6 @@
   }
   firebase.initializeApp(firebaseConfig);
 </script>
-  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
-  
-  <script  src= "/views/profile.js"></script>
-   
+  <script type="module" src='./index.js'></script>
 </body>
 </html>
