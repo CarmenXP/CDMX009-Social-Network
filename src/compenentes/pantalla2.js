@@ -1,3 +1,5 @@
+import { pantalla1 } from './pantalla1.js'
+
 let root = document.querySelector('#root');
 export const registros = () =>{
 let template = `
@@ -15,4 +17,21 @@ let template = `
  <p class='iniciar'>Iniciar sesión</p>
  `;
 root.innerHTML = template;
+let init = document.querySelector('.iniciar');
+init.addEventListener('click', pantalla1);
+
+let create = document.querySelector('#creat');
+create.addEventListener('click', newUser);
+
+function newUser(){
+  let email = document.querySelector('#mail').value;
+  let password = document.querySelector('#acs').value;
+  firebase.auth().createUserWithEmailAndPassword(email,password)
+  .catch(function(error){
+    let errorMessage = error.message;
+    let errorCode = error.code;
+    alert(errorMessage);
+    alert(errorCode);
+  })
+}
 }

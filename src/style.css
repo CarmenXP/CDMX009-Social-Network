@@ -282,3 +282,14 @@ color: #256BF4;
     width:360px;
     height:640px;
 }
+.photo{
+    width: 50%;
+    height: 50%;
+}
+
+.inicio{
+    background: #FFEEEE;
+    border: 1px solid rgba(255, 253, 253, 0.988);
+    box-sizing: border-box;
+    border-radius: 15px;
+}

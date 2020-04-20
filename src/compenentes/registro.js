@@ -1,11 +1,8 @@
 let div = document.querySelector('#root');
 export const registrar = () => {
- let a = document.querySelector('#registro');
- a.addEventListener('click', forma);
- function forma(){   
  let inicio = `
-<h1>Hola<h1>
+<input class='head' type='button'>
+<h2Hola!><h2>
  `
  div.innerHTML = inicio;
  }
-}
