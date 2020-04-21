@@ -21,5 +21,5 @@ let salir = document.querySelector('.salir');
 salir.addEventListener('click' , pantalla1 )
 
 let bttninicio = document.querySelector('.inicio');
-bttninicio.addEventListener('click', publicaciones);
+bttninicio.addEventListener('click', publicaciones(user));
 }
