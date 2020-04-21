@@ -1,9 +1,13 @@
 import { registros } from './pantalla2.js'
+import { registrar } from './registro.js'
+import { welcome } from './pantalla3.js'
+
+// globas
+//let user = {}
 
 let root = document.querySelector('#root');
- export const login = () => {
+ export const pantalla1 = () => {
 let p = `
-
      <img class='image' src="/img/portada.jpg">
      <h1> Bienvenida a nuestra comunidad  
      de programadoras </h1>
@@ -27,15 +31,18 @@ let p = `
 root.innerHTML = p;
 
 let bttn = document.querySelector('.logoG');
-bttn.addEventListener('click', login);
-function login (){
+bttn.addEventListener('click', loginGmail);
+  function loginGmail (){
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then(function(result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
         // The signed-in user info.
-        var user = result.user;
-        // ...
+        let user = {}
+        user.displayName  = result.user.displayName
+        user.email = result.user.email
+        user.photoURL = result.user.photoURL
+        welcome(user)
       }).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -45,59 +52,34 @@ function login (){
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
         // ...
-      });
+      })
 }
-
-
-let bttn0 = document.querySelector('.logoF');
-bttn0.addEventListener('click', loginF);
-function loginF(){
-var provider = new firebase.auth.FacebookAuthProvider();
-firebase.auth().signInWithPopup(provider).then(function(result) {
-    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
-}
-
-let bttn1 = document.querySelector('.logoF');
-bttn1.addEventListener('click', loginF);
-function loginF(){
-    var provider = new firebase.auth.FacebookAuthProvider();
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+     
+     let bttnfb = document.querySelector('.logoF');
+     bttnfb.addEventListener('click', loginFb);
+     function loginFb(){
+      var provider = new firebase.auth.FacebookAuthProvider();
+      firebase.auth().signInWithPopup(provider).then(function(result) {
         var token = result.credential.accessToken;
-        // The signed-in user info.
         var user = result.user;
-        // ...
-      }).catch(function(error) {
-        // Handle Errors here.
+        console.log(user);
+
+         }).catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
-        // The email of the user's account used.
         var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
-        // ...
-      });
-   }
+      })
+     }
 
 let registro = document.querySelector('#registro');
 registro.addEventListener('click', registra);
 function registra(){
 registros()
 }
+let ingreso = document.querySelector('#ingresa');
+ingreso.addEventListener('click', ingresado);
+function ingresado(){
+registrar();
 }
-
-  
+}
