@@ -1,6 +1,6 @@
 import { registros } from './pantalla2.js'
 import { registrar } from './registro.js'
-import { welcome } from './pantalla3.js/index.js'
+import { welcome } from './pantalla3.js'
 
 // globas
 //let user = {}

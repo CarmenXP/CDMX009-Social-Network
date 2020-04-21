@@ -152,6 +152,8 @@ color: #2641D0;
     background: rgba(250, 208, 208, 0.7);
 }
 .head{
+ left: 0px;
+ left: 0px;   
 width: 360px;
 height: 78px;
 background: rgba(250, 208, 208, 0.7);
@@ -288,8 +290,35 @@ color: #256BF4;
 }
 
 .inicio{
-    background: #FFEEEE;
-    border: 1px solid rgba(255, 253, 253, 0.988);
-    box-sizing: border-box;
-    border-radius: 15px;
+    
+position: absolute;
+width: 60px;
+height: 19px;
+left: 76px;
+top: 75px;
+
+background: #FFEEEE;
+border: 1px solid rgb(255, 255, 255);
+box-sizing: border-box;
+border-radius: 15px;
+}
+.perfil{
+    position: absolute;
+width: 60px;
+height: 19px;
+left: 145.89px;
+top: 75px;
+border: 1px solid rgb(255, 255, 255);
+background: #FFEEEE;
+border-radius: 15px;
+}
+.salir{
+    position: absolute;
+width: 60px;
+height: 19px;
+left: 215px;
+top: 75px;
+border: 1px solid rgb(255, 255, 255);
+background: #FFEEEE;
+border-radius: 15px;
 }
