@@ -10,6 +10,34 @@
 </head>
 <body>
   <div class="root" id="root"></div>
+
+  <div class="main-content">
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Mis publicaciones</th>
+          </tr>
+        </thead>
+        <tbody id="bodyTable" class= "bodyTable">
+          <tr>
+            <td>comentario</td>
+          </tr>
+    
+        </tbody>
+      </table>  
+
+    
+    <form id="contentComment">
+    <input type="text" name="postShare" class= "postShare" id="postShare" placeholder="¿Quieres compartir algo">
+    <br>
+    <button  id="sendComment" class="sendComment" >Compartir</button>
+    </form>    
+
+</div>
+
+
+
   <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase.js"></script>
  <script>
   var firebaseConfig = {
