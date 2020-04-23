@@ -23,12 +23,14 @@ salir.addEventListener('click' , pantalla1 )
 let bttninicio = document.querySelector('.inicio');
 bttninicio.addEventListener('click', publicaciones);
 }
-// Hacer publicaciones, eliminación y borrado
+//Código ´para  hacer publicaciones, eliminación y borrado
 
 let bodyTable= document.querySelector("#bodyTable");
 const boxComment= document.querySelector("#contentComment");
-
-//enviando publicaciones a la base de datos Firestore
+let comment= document.querySelector("#postShare");
+document.querySelector("#saveComment").style.display= "none";
+let savebutton= document.querySelector("#sendComment")
+//añadiendo y enviando publicaciones a la base de datos Firestore
 boxComment.addEventListener("submit", (e) =>{
 e.preventDefault(); 
     db.collection("publicaciones").add({
@@ -53,22 +55,47 @@ db.collection("publicaciones").onSnapshot((querySnapshot)=> {
         `
         <tr>
         <td>${doc.data().post}</td>
-        <td><button id="delete" class="delete">Eliminar</button></td>
-        <td><button id="editing" class="editing">Editar</button></td>
+        <td><button id="delete" class="delete" onclick="deletingPublish('${doc.id}')">Eliminar</button></td>
+        <td><button id="editing" class="editing" onclick="editingPublish('${doc.id}','${doc.data().post}')">Editar</button></td>
         
         </tr>
-      `; 
-      //listeners
-      //let btnDelete= document.querySelector("#delete");
-      //btnDelete.onclick = ()=>{console.log("mija")}
+      `;    
   });   
 });
 
 //borrando las publicaciones anteriormente realizadas
-//function deletingPublish(){
-//  db.collection("publicaciones").doc(id).delete().then(function() {
-//      console.log("Document successfully deleted!");
-//  }).catch(function(error) {
-//      console.error("Error removing document: ", error);
-// });
-//}
+function deletingPublish(id){
+  db.collection("publicaciones").doc(id).delete().then(function() {
+      console.log("Document successfully deleted!");
+  }).catch(function(error) {
+      console.error("Error removing document: ", error);
+ });
+}
+
+// editando publicaciones anteriormente realizadas
+function editingPublish(id,comment){
+    document.querySelector("#postShare").value= comment;
+    document.querySelector("#saveComment").style.display= "block";
+    document.querySelector("#sendComment").style.display= "none";
+    let editingButton = document.querySelector("#saveComment");
+    
+editingButton.onclick= ()=>{
+    let editingComment = db.collection("publicaciones").doc(id);
+    let newComment= document.querySelector("#postShare").value;
+    return editingComment.set({
+    post: newComment
+})
+    .then(function() {
+    console.log("Document successfully updated!");
+    document.querySelector("#postShare").value= "";
+    document.querySelector("#saveComment").style.display= "none";
+    document.querySelector("#sendComment").style.display= "block";
+})
+    .catch(function(error) {
+    // The document probably doesn't exist.
+    console.error("Error updating document: ", error);
+  });
+    
+ }
+
+}

@@ -26,13 +26,16 @@
     
         </tbody>
       </table>  
-
-    
+ 
     <form id="contentComment">
-    <input type="text" name="postShare" class= "postShare" id="postShare" placeholder="¿Quieres compartir algo">
-    <br>
-    <button  id="sendComment" class="sendComment" >Compartir</button>
-    </form>    
+      <input type="text" name="postShare" class= "postShare" id="postShare" placeholder="¿Quieres compartir algo">
+      <br>
+      <br>
+      <div id="buttons" class="buttons">
+      <button  type="submit" id="sendComment" class="sendComment" >Compartir</button>
+      <button   type= "button" id="saveComment" class="saveComment" >Guardar</button>
+      </div>
+      </form> 
 
 </div>
 
@@ -51,6 +54,7 @@
     measurementId: "G-XCKZ3CHREZ"
   }
   firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
 </script>
   <script type="module" src='./index.js'></script>
 </body>
