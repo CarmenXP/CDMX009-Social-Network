@@ -72,33 +72,26 @@ db.collection("posts").onSnapshot((querySnapshot)=> {
         let post = `
         <p>${doc.data().name}</p>
         <p>${doc.data().texto}</p>
-        <button id="delete" class="delete">Eliminar</button>
+        <button id="delete" value="${doc.id}" class="delete">Eliminar</button>
         <button  id="edit" class="edit">Editar</button>
         `
     let nodo = document.createElement('div');
     nodo.classList.add('card')
     nodo.innerHTML = post;
     root2.appendChild(nodo);
-
-    let bttnedit = document.querySelector('#sendComment');
-
-    let idbttn = document.querySelectorAll('#delete');
-    idbttn.forEach(btn => btn.addEventListener('click', (id) => {
-        id = doc.id;
-        db.collection("posts").doc(id).delete().then(function() {
-            console.log("Document successfully deleted!");
+});
+let idbttn = document.querySelectorAll('#delete');
+    idbttn.forEach(btn => btn.addEventListener('click', (value) => {
+        value = btn.value;
+        db.collection("posts").doc(value).delete().then(function() {
         }).catch(function(error) {
-            console.error("Error removing document: ", error);
+          alert("Error removing document: ", error);
         });
     
     }
-    ))
-   // idbttn.addEventListener('click', function(){
-          //eliminar(doc.id)
-  //});
-});
-});
+    ));
 
+});
 
 let salir = document.querySelector('.salir');
 salir.addEventListener('click' , pantalla1 );
