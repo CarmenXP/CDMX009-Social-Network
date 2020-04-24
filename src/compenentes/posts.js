@@ -10,8 +10,9 @@ export const publicaciones = (user) => {
 <input class='salir' type='button' value='Salir'/>
 <div>
 <h1 class='userName'>${user.displayName}</h1>
-<input type='text' id='txt' class='txt' placeholder='¿Que quieres compartir?'>
-<input type='button' value='Compartir' class='compartir' id='Compartir'>
+<input type='text' id="txt" class='txt' placeholder='¿Que quieres compartir?'>
+<input type='button' value='Compartir' class='compartir' id="Compartir">
+<input id="sendComment" type='button' value='Guardar' class='Guardar'>
 <img class="inputImg" id='file' src="/img/file.png">
 <div id='root1'>
 </div>
@@ -38,14 +39,31 @@ function enviar(){
         console.error("Error adding document: ", error);
     });
 }
-
-function eliminar(id){
-    db.collection("posts").doc(id).delete().then(function() {
-        console.log("Document successfully deleted!");
-    }).catch(function(error) {
-        console.error("Error removing document: ", error);
-    });
-
+function editar(id, post){
+   
+        document.querySelector("#txt").value= comment;
+        document.querySelector("#compartir").style.display= "block";
+        document.querySelector("#sendComment").style.display= "none";
+        let editingButton = document.querySelector("Compartir");
+    
+    editingButton.onclick= ()=>{
+        let editingComment = db.collection("pots").doc(id);
+        let newComment= document.querySelector("#txt").value;
+        return editingComment.set({
+        post: newComment
+    })
+        .then(function() {
+        console.log("Document successfully updated!");
+        document.querySelector("#txt").value= "";
+        document.querySelector("#compartir").style.display= "none";
+        document.querySelector("#sendComment").style.display= "block";
+    })
+        .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
+    
+     }
 }
 
 db.collection("posts").onSnapshot((querySnapshot)=> {
@@ -61,10 +79,23 @@ db.collection("posts").onSnapshot((querySnapshot)=> {
     nodo.classList.add('card')
     nodo.innerHTML = post;
     root2.appendChild(nodo);
-    let idbttn = document.querySelector('#delete');
-    idbttn.addEventListener('click', function(){
-          eliminar(doc.id)
-    });
+
+    let bttnedit = document.querySelector('#sendComment');
+
+    let idbttn = document.querySelectorAll('#delete');
+    idbttn.forEach(btn => btn.addEventListener('click', (id) => {
+        id = doc.id;
+        db.collection("posts").doc(id).delete().then(function() {
+            console.log("Document successfully deleted!");
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
+    
+    }
+    ))
+   // idbttn.addEventListener('click', function(){
+          //eliminar(doc.id)
+  //});
 });
 });
 
