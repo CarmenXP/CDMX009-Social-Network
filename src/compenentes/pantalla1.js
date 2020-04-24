@@ -1,6 +1,6 @@
 import { registros } from './pantalla2.js'
 import { registrar } from './registro.js'
-import { welcome } from './pantalla3.js/index.js'
+import { welcome } from './pantalla3.js'
 
 // globas
 //let user = {}
@@ -15,7 +15,7 @@ let p = `
       <form class ='input'>
          <input type="text" id="email" class="email" placeholder="example@gmail.com">
          <input type="text" id="password" class="password" placeholder="Password">
-         <input type="button" value="Ingresar" id="ingresa" class="acess">
+         <input type="button" value="Ingresar" id="getInto" class="acess">
       </form>
       <a class="pass">Olvide mi contraseña</a>
       <p class='options'> Ingresa con:</p>
@@ -72,14 +72,68 @@ bttn.addEventListener('click', loginGmail);
       })
      }
 
-let registro = document.querySelector('#registro');
-registro.addEventListener('click', registra);
-function registra(){
-registros()
-}
-let ingreso = document.querySelector('#ingresa');
-ingreso.addEventListener('click', ingresado);
-function ingresado(){
-registrar();
-}
+
+     let signInWithEmail = document.querySelector('#getInto');
+     signInWithEmail.addEventListener('click', signIn);
+        function signIn(){
+         let email= document.querySelector('#email').value;
+         let password= document.querySelector('#password').value;
+         firebase.auth().signInWithEmailAndPassword(email, password).then(function(result){
+           console.log(user)
+          let user = {}
+          user.displayName  = result.user.displayName
+          user.email = result.user.email
+          user.photoURL = result.user.photoURL
+          welcome(user)
+         })
+         .catch(function(error) {
+         // Handle Errors here.
+         var errorCode = error.code;
+         var errorMessage = error.message;
+         alert(errorCode);
+         alert('Ingresa tus datos')
+         // ...
+       })
+     } 
+  
+     function observer(){
+       firebase.auth().onAuthStateChanged(function(user) {
+           if (user) {
+             // User is signed in.
+  
+               let displayName= user.displayName;
+               let email= user.email;
+               console.log(user);
+               let emailVerified = user.emailVerified; 
+               let photoURL = user.photoURL;
+               let isAnonymous = user.isAnonymus;
+               let uid = user.uid;
+               let providerData= user.provideData;
+  
+           } else {
+               console.log("no exite usuario activo")
+             // No user is signed in.
+           }
+         });
+     }
+     observer();
+     // Aquí irá la  función para pasar al perfil del usuario
+     let registro = document.querySelector('#registro');
+     registro.addEventListener('click', registra);
+     function registra(){
+     registros()
+     }
+     
+  
+     //Guarda en B.D cloud firestore usuarios registrados en la colleccion usersRef
+     function saveUser (user){
+      let usuario = {
+        uid: user.uid,
+        nombre: user.displayName,
+        email: user.email,
+        foto: user.photoURL
+       }
+       usersRef.doc(user.uid).set(usuario)
+     }
+
 }

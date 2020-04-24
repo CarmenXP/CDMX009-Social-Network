@@ -288,8 +288,87 @@ color: #256BF4;
 }
 
 .inicio{
-    background: #FFEEEE;
-    border: 1px solid rgba(255, 253, 253, 0.988);
-    box-sizing: border-box;
+position: absolute;
+box-sizing: border-box;	width: 60px;
+border-radius: 15px;	height: 19px;
+left: 76px;
+top: 75px;
+background: #FFEEEE;
+border: 1px solid rgb(255, 255, 255);
+box-sizing: border-box;
+border-radius: 15px;
+}
+.perfil{
+    position: absolute;
+width: 60px;
+height: 19px;
+left: 145.89px;
+top: 75px;
+border: 1px solid rgb(255, 255, 255);
+background: #FFEEEE;
+border-radius: 15px;
+}
+.salir{
+    position: absolute;
+width: 60px;
+height: 19px;
+left: 215px;
+top: 75px;
+border: 1px solid rgb(255, 255, 255);
+background: #FFEEEE;
+border-radius: 15px;
+}
+.userName{
+top: 100px;
+width: 270px;
+height: 25px;
+border: 1px solid rgba(0, 0, 0, 0.35);
+border-radius: 5px;
+}
+.txt{
+position: absolute;
+width: 270px;
+height: auto;
+top: 140px;
+left: 40px;
+background: rgb(249, 249, 249);
+border: 1px solid rgba(0, 0, 0, 0.35);
+box-sizing: border-box;
+border-radius: 5px;
+}
+.compartir{
+position: absolute;
+    width: 75px;
+    height: 18px;
+    left: 230px;
+    top: 160px;
+  background: rgba(147, 72, 232, 0.18);
     border-radius: 15px;
+}
+.inputImg{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 160px;
+    left: 100px;
+}
+#pintar{    
+    width: 200px;
+    height: 200px;
+    top: 300px;
+}
+#root2{
+    position: absolute;
+    top: 200px;
+}
+.card{
+    margin:10px;
+    box-shadow:0px 2px 10px grey;
+    text-align:center;
+    border-radius:10px;
+    padding:10px;
+    width:180px;
+    transition:all .3s;
+    width: 350px;
+    height: auto;
 }
