@@ -374,3 +374,31 @@ position: absolute;
     width: 350px;
     height: auto;
 }
+.guardar{
+ position: absolute;
+width: 75px;
+height: 18px;
+left: 230px;
+top: 160px;
+background: rgba(147, 72, 232, 0.18);
+border-radius: 15px;
+display: none;
+ }
+ .contador{
+  position: absolute;
+  top: 160px;
+  width: 30px;
+  height: 30px;
+  left: 145px;
+ }
+ .counter{
+    position: absolute;
+    top: 160px;
+    left: 165px;
+    border : 1px #000000;
+ }
+.cont{
+    position: absolute;
+     top: 0.5px;
+     left: 25px;
+ }
