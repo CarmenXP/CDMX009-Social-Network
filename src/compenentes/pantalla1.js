@@ -1,8 +1,9 @@
 import { registros } from './pantalla2.js'
 import { welcome } from './pantalla3.js'
+import { recoverPassword } from './pantalla4.js'
 // globas
 //let user = {}
-
+let db = firebase.firestore();
 let root = document.querySelector('#root');
  export const pantalla1 = () => {
 let p = `
@@ -12,7 +13,7 @@ let p = `
      <img class='logo' src="./img/logo.jpeg">
       <form class ='input'>
          <input type="text" id="email" class="email" placeholder="example@gmail.com">
-         <input type="text" id="password" class="password" placeholder="Password">
+         <input type="password" id="password" class="password" placeholder="Contraseña" minlength="6" required>
          <input type="button" value="Ingresar" id="getInto" class="acess">
       </form>
       <a class="pass">Olvide mi contraseña</a>
@@ -41,6 +42,7 @@ bttn.addEventListener('click', loginGmail);
         user.email = result.user.email
         user.photoURL = result.user.photoURL
         welcome(user)
+        saveUser(user)
       }).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -61,7 +63,8 @@ bttn.addEventListener('click', loginGmail);
         var token = result.credential.accessToken;
         var user = result.user;
         console.log(user);
-
+           welcome(user)
+           saveUser(user)
          }).catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -77,21 +80,23 @@ bttn.addEventListener('click', loginGmail);
          let email= document.querySelector('#email').value;
          let password= document.querySelector('#password').value;
          firebase.auth().signInWithEmailAndPassword(email, password).then(function(result){
-           console.log(user)
-          let user = {}
-          user.displayName  = result.user.displayName
-          user.email = result.user.email
-          user.photoURL = result.user.photoURL
+           console.log(result);
+           let user = result.user;
+          let userInfo = {}
+          userInfo.displayName  = result.user.displayName
+          userInfo.email = result.user.email
+          userInfo.photoURL = result.user.photoURL
+          console.log(userInfo);
           welcome(user)
+          saveUser(userInfo)
          })
          .catch(function(error) {
          // Handle Errors here.
          var errorCode = error.code;
          var errorMessage = error.message;
-         alert(errorCode);
-         alert('Ingresa tus datos')
+        console.log(errorCode);
          // ...
-       })
+       });
      } 
   
      function observer(){
@@ -101,7 +106,7 @@ bttn.addEventListener('click', loginGmail);
   
                let displayName= user.displayName;
                let email= user.email;
-               console.log(user);
+              // console.log(user);
                let emailVerified = user.emailVerified; 
                let photoURL = user.photoURL;
                let isAnonymous = user.isAnonymus;
@@ -125,13 +130,24 @@ bttn.addEventListener('click', loginGmail);
   
      //Guarda en B.D cloud firestore usuarios registrados en la colleccion usersRef
      function saveUser (user){
-      let usuario = {
+       db.collection("user").add({
         uid: user.uid,
         nombre: user.displayName,
         email: user.email,
         foto: user.photoURL
-       }
-       usersRef.doc(user.uid).set(usuario)
+    })
+    .then(function(docRef) {
+        console.log(docRef.id)
+    })
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
+    
      }
 
+     let pass = document.querySelector('.pass');
+    pass.addEventListener('click', recupera);
+    function recupera(){
+     recoverPassword()
+    }
 }

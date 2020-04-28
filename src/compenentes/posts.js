@@ -17,9 +17,6 @@ export const publicaciones = (user) => {
 <div id='root1'>
 </div>
 <div id='root2'></div>
-<div id="counter" class="counter">
-      <button id="like"  class="like">Me gusta</button><p class="cont" id="counting"></p> 
-    </div>
 `;
 
 root.innerHTML = post;
@@ -34,6 +31,7 @@ function enviar(){
     db.collection("posts").add({
         name : user.displayName,
         texto : text.value,
+        likes: 0
     })
     .then(function(docRef) {
         console.log(docRef.id)
@@ -50,9 +48,10 @@ db.collection("posts").onSnapshot((querySnapshot)=> {
     querySnapshot.forEach((doc) => {
         let post = `
         <p>${doc.data().name}</p>
-        <p>${doc.data().texto}</p>
-        <button id="delete" value="${doc.id}" class="delete">Eliminar</button>
-        <button  id="edit" name="${doc.data().texto}" value="${doc.id}" class="edit">Editar</button>
+        <p id="txt" value="txtv">${doc.data().texto}</p>
+     <button  id="like"  name="${doc.data().texto}" value='${doc.id}'>Me gusta</button> <p class="like">${doc.data().likes}<p>
+     <button id="delete" value="${doc.id}" class="delete">Eliminar</button>
+     <button  id="edit" name="${doc.data().texto}" value="${doc.id}" class="edit">Editar</button>
         `
     let nodo = document.createElement('div');
     nodo.classList.add('card')
@@ -78,8 +77,9 @@ let editbttn = document.querySelectorAll('#edit');
         bttnsave.addEventListener('click',function(){
             let txt = document.querySelector('#txt').value;
             console.log(txt);
-            let colection= db.collection("pots").doc(valor);
-               colection.update({
+            let colection= db.collection("posts").doc(valor);
+               return colection.set({
+                name: user.displayName,   
                 texto : txt
                }).then(function(){
                 console.log("documents successfully uptade")
@@ -92,13 +92,34 @@ let editbttn = document.querySelectorAll('#edit');
             });
         })
     })); 
-});
+  let like = document.querySelectorAll('#like');
+  like.forEach(likes=> likes.addEventListener('click', (e, iddoc)=>{
+      iddoc = likes.value;
+     let docRef =  db.collection("posts").doc(iddoc);
+     docRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+            let like = doc.data().likes;
+            let i =like+1;
+            console.log(i)
+           // let suma = like++;
+           return docRef.set({
+                name: doc.data().name,
+                texto: doc.data().texto,
+                likes: i
+            })
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+       
+  }))
 
-let likeBttn= document.querySelector('#like');
-let like =0;
-likeBttn.addEventListener('click',()=>{
-    document.querySelector('#counting').innerHTML = ++like;
-})
+
+});
 
 let salir = document.querySelector('.salir');
 salir.addEventListener('click' , pantalla1 );

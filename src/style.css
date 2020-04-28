@@ -397,8 +397,28 @@ display: none;
     left: 165px;
     border : 1px #000000;
  }
-.cont{
+ .send{
+   position: absolute;
+   top: 310px;
+   left: 145px;  
+ }
+ .ini{
     position: absolute;
-     top: 0.5px;
-     left: 25px;
+    width: 77px;
+    height: 15px;
+    left: 128px;
+    top: 330px;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+    text-decoration-line: underline;
+    color: #256BF4;
+ }
+ .enterEmail{
+     position: absolute;
+     top: 150px;
+     left: 60px;
+     text-align: center;
  }
