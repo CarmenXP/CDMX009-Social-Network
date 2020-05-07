@@ -87,7 +87,7 @@ function loginFb(){
          saveUser(userInfo)
        })
        .catch(function(error) {
-       // Handle Errors here.
+      alert('ocurrio un error, asegurate que tu correo este verificado y/o los campos estén bien completados')
        var errorCode = error.code;
        var errorMessage = error.message;
        console.log(errorCode);

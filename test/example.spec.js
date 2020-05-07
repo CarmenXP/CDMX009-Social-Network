@@ -1,7 +1,8 @@
-import { example } from '../src/example.js';
+function checkEmailFake(email){
+  if(email!="") return "Ingresaste tu correo bien"
+}
 
-describe('example', () => {
-  it('debería ser una función', () => {
-    expect(typeof example).toBe('function');
-  });
-});
+test("Email validation", ()=>{
+  let correo="algo@algo.com"
+  expect(checkEmailFake(correo)).toBe("Ingresaste tu correo bien")
+})

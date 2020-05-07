@@ -43,10 +43,9 @@ let addBtn = document.querySelector('.compartir');
 let db = firebase.firestore();
 //funcion para enviar posts a base de datos
 addBtn.addEventListener('click', enviar);
-function enviar(){
+ function enviar(){
     db.collection("posts").add({
         name : user.displayName,
-        date: new Date(),
         texto : text.value,
         likes: [],
         image: url
@@ -209,6 +208,7 @@ function pos(){
 
      //}
      //upLoadPhoto();
+   
 }
 
 
