@@ -182,7 +182,7 @@ anterior en la siguiente sección.
 ### Colaboración en Github
 
 * [ x ] Branches
-* [ x ] Pull Requests
+* [ ] Pull Requests
 * [ ] Tags
 
 ### Organización en Github
