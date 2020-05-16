@@ -3,7 +3,7 @@ import { welcome } from './pantalla3.js'
 let root = document.querySelector('#root');
  export const pantalla1 = () => {
 let p = `
-     <img class='image' src="/img/portada.jpg">
+     <img class='image' src="./img/portada.jpg">
      <h1> Bienvenida a nuestra comunidad  
      de programadoras </h1>
      <img class='logo' src="./img/logo.jpg">
@@ -13,8 +13,8 @@ let p = `
          <input type="button" value="Ingresar" id="getInTo" class="acess">
       </form>
       <p class='options'> Ingresa con:</p>
-           <img class="logoF" src="/img/F.jpg">
-             <img class="logoG" src="/img/G.jpg">
+           <img class="logoF" src="./img/F.jpg">
+             <img class="logoG" src="./img/G.jpg">
       <p class="not">¿No tienes cuenta?</p>
       <a class="re" id="registro">Registrate</a>
       </div>
